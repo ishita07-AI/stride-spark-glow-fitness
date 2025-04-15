@@ -1,8 +1,14 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
-import { Dumbbell, Calendar, Clock, Filter } from "lucide-react";
+import { Dumbbell, Calendar, Clock, Filter, Play, Pause } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const workoutData = [
   {
@@ -13,6 +19,8 @@ const workoutData = [
     calories: 320,
     difficulty: "Medium",
     scheduled: "Today, 07:00 AM",
+    image: "/lovable-uploads/2aadcf49-8103-4e1d-8b03-81ec0bf5096f.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
   {
     id: 2,
@@ -22,6 +30,8 @@ const workoutData = [
     calories: 450,
     difficulty: "Hard",
     scheduled: "Tomorrow, 06:30 PM",
+    image: "/lovable-uploads/67dbff06-1948-430e-b206-167a83f801ee.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
   {
     id: 3,
@@ -31,6 +41,8 @@ const workoutData = [
     calories: 210,
     difficulty: "Easy",
     scheduled: "Wed, 08:00 AM",
+    image: "/lovable-uploads/a91f762f-8942-40a0-b2ee-0ae110372d26.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
   {
     id: 4,
@@ -40,6 +52,8 @@ const workoutData = [
     calories: 180,
     difficulty: "Medium",
     scheduled: "Thu, 07:30 PM",
+    image: "/lovable-uploads/bd847877-038f-4f23-bdf6-74d571da16bd.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
   {
     id: 5,
@@ -49,10 +63,15 @@ const workoutData = [
     calories: 480,
     difficulty: "Hard",
     scheduled: "Sat, 10:00 AM",
+    image: "/lovable-uploads/2aadcf49-8103-4e1d-8b03-81ec0bf5096f.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
 ];
 
 const Workouts = () => {
+  const [selectedWorkout, setSelectedWorkout] = React.useState(workoutData[0]);
+  const [isPlaying, setIsPlaying] = React.useState(true);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <NavBar />
@@ -78,8 +97,72 @@ const Workouts = () => {
             New Workout
           </motion.button>
         </motion.div>
+
+        {/* Featured Workout Video Section */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mb-8 bg-white rounded-2xl shadow-sm overflow-hidden"
+        >
+          <div className="relative aspect-video w-full">
+            <iframe
+              src={`${selectedWorkout.videoUrl}${isPlaying ? '' : '&pause=1'}`}
+              className="absolute inset-0 w-full h-full"
+              allow="autoplay; fullscreen"
+              frameBorder="0"
+            ></iframe>
+            <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-black/50 px-4 py-2 rounded-xl text-white">
+              <div>
+                <h3 className="font-semibold">{selectedWorkout.title}</h3>
+                <p className="text-sm opacity-80">{selectedWorkout.category}</p>
+              </div>
+              <button 
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="p-2 hover:bg-white/20 rounded-full transition-colors"
+              >
+                {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Workout Carousel */}
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Popular Workouts</h2>
+          <Carousel className="w-full">
+            <CarouselContent>
+              {workoutData.map((workout) => (
+                <CarouselItem key={workout.id} className="basis-1/3">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    className="cursor-pointer"
+                    onClick={() => setSelectedWorkout(workout)}
+                  >
+                    <div className="relative aspect-video rounded-xl overflow-hidden">
+                      <img 
+                        src={workout.image} 
+                        alt={workout.title}
+                        className="object-cover w-full h-full"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                        <div className="text-white">
+                          <h3 className="font-semibold">{workout.title}</h3>
+                          <p className="text-sm opacity-80">{workout.duration}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
         
-        <div className="bg-white p-4 rounded-xl shadow-sm mb-8">
+        {/* Workout Table */}
+        <div className="bg-white p-4 rounded-xl shadow-sm">
           <div className="flex flex-wrap gap-3 mb-4">
             <div className="flex items-center px-4 py-2 bg-gray-100 rounded-lg">
               <Calendar size={18} className="text-gray-500 mr-2" />
