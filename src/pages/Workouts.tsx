@@ -1,8 +1,8 @@
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
-import { Dumbbell, Calendar, Clock, Filter, Play, Pause } from "lucide-react";
+import { Dumbbell, Calendar, Clock, Filter, Play, Pause, Male, Female } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +10,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { WorkoutTimer } from "@/components/WorkoutTimer";
+import { WorkoutGallery } from "@/components/WorkoutGallery";
 
 const workoutData = [
   {
@@ -21,7 +23,8 @@ const workoutData = [
     difficulty: "Hard",
     scheduled: "Today, 07:00 AM",
     image: "/lovable-uploads/a16f3898-5e26-455a-8bdd-75a6b87c39b1.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+    videoUrl: "https://www.youtube.com/embed/cbKkB3POqaY?autoplay=1&mute=1&loop=1&playlist=cbKkB3POqaY",
+    forGender: "both",
   },
   {
     id: 2,
@@ -32,35 +35,52 @@ const workoutData = [
     difficulty: "Medium",
     scheduled: "Tomorrow, 06:30 PM",
     image: "/lovable-uploads/00d88f59-0429-4587-8886-94b6795a4161.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+    videoUrl: "https://www.youtube.com/embed/-hSma-BRzoo?autoplay=1&mute=1&loop=1&playlist=-hSma-BRzoo",
+    forGender: "both",
   },
   {
     id: 3,
-    title: "Core Power",
-    category: "Core",
+    title: "Women's HIIT",
+    category: "HIIT",
     duration: "35 min",
     calories: 280,
     difficulty: "Medium",
     scheduled: "Wed, 08:00 AM",
-    image: "/lovable-uploads/d5c09273-7871-4878-b456-14157f7268e4.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+    image: "/lovable-uploads/3c53fdd9-7aef-4264-b239-a7a1a08a89cd.png",
+    videoUrl: "https://www.youtube.com/embed/-hSma-BRzoo?autoplay=1&mute=1&loop=1&playlist=-hSma-BRzoo",
+    forGender: "female",
   },
   {
     id: 4,
-    title: "Full Body Circuit",
+    title: "Men's Full Body",
     category: "Full Body",
     duration: "50 min",
     calories: 520,
     difficulty: "Hard",
     scheduled: "Thu, 07:30 PM",
     image: "/lovable-uploads/611d0e6c-78dc-4dfa-a627-b180ae391f47.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+    videoUrl: "https://www.youtube.com/embed/cbKkB3POqaY?autoplay=1&mute=1&loop=1&playlist=cbKkB3POqaY",
+    forGender: "male",
   }
 ];
 
 const Workouts = () => {
-  const [selectedWorkout, setSelectedWorkout] = React.useState(workoutData[0]);
-  const [isPlaying, setIsPlaying] = React.useState(true);
+  const [selectedWorkout, setSelectedWorkout] = useState(workoutData[0]);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [selectedGender, setSelectedGender] = useState("both");
+  const [filteredWorkouts, setFilteredWorkouts] = useState(workoutData);
+
+  useEffect(() => {
+    if (selectedGender === "both") {
+      setFilteredWorkouts(workoutData);
+    } else {
+      setFilteredWorkouts(
+        workoutData.filter(workout => 
+          workout.forGender === selectedGender || workout.forGender === "both"
+        )
+      );
+    }
+  }, [selectedGender]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
@@ -88,6 +108,31 @@ const Workouts = () => {
           </motion.button>
         </motion.div>
 
+        {/* Gender Selection */}
+        <div className="mb-6 flex items-center space-x-4">
+          <span className="text-gray-300">Filter by:</span>
+          <button 
+            className={`px-4 py-2 rounded-lg flex items-center ${selectedGender === "both" ? "bg-steppy-primary text-white" : "bg-gray-800 text-gray-300"}`}
+            onClick={() => setSelectedGender("both")}
+          >
+            <span className="mr-2">All</span>
+          </button>
+          <button 
+            className={`px-4 py-2 rounded-lg flex items-center ${selectedGender === "male" ? "bg-steppy-primary text-white" : "bg-gray-800 text-gray-300"}`}
+            onClick={() => setSelectedGender("male")}
+          >
+            <Male size={18} className="mr-2" />
+            <span>Men</span>
+          </button>
+          <button 
+            className={`px-4 py-2 rounded-lg flex items-center ${selectedGender === "female" ? "bg-steppy-primary text-white" : "bg-gray-800 text-gray-300"}`}
+            onClick={() => setSelectedGender("female")}
+          >
+            <Female size={18} className="mr-2" />
+            <span>Women</span>
+          </button>
+        </div>
+
         {/* Featured Workout Video Section with Timer */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -105,14 +150,7 @@ const Workouts = () => {
             ></iframe>
             
             {/* Timer Overlay */}
-            <div className="absolute top-4 left-4 z-20 text-yellow-400 font-bold text-2xl flex items-center">
-              <motion.div
-                animate={{ opacity: [1, 0.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                0:30
-              </motion.div>
-            </div>
+            <WorkoutTimer className="absolute top-4 left-4 z-20" />
             
             {/* Stats Overlay */}
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white z-20">
@@ -124,6 +162,12 @@ const Workouts = () => {
                     {selectedWorkout.duration}
                   </span>
                   <span>{selectedWorkout.calories} cal</span>
+                  {selectedWorkout.forGender !== "both" && (
+                    <span className="flex items-center">
+                      {selectedWorkout.forGender === "male" ? <Male size={14} className="mr-1" /> : <Female size={14} className="mr-1" />}
+                      {selectedWorkout.forGender === "male" ? "Men" : "Women"}
+                    </span>
+                  )}
                 </div>
               </div>
               
@@ -142,7 +186,7 @@ const Workouts = () => {
           <h2 className="text-xl font-semibold mb-6 text-gray-100">Featured Workouts</h2>
           <Carousel className="w-full">
             <CarouselContent>
-              {workoutData.map((workout) => (
+              {filteredWorkouts.map((workout) => (
                 <CarouselItem key={workout.id} className="basis-1/3">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -159,6 +203,12 @@ const Workouts = () => {
                         <div className="text-white">
                           <h3 className="font-semibold">{workout.title}</h3>
                           <p className="text-sm opacity-80">{workout.duration}</p>
+                          {workout.forGender !== "both" && (
+                            <div className="flex items-center mt-1">
+                              {workout.forGender === "male" ? <Male size={12} className="mr-1" /> : <Female size={12} className="mr-1" />}
+                              <span className="text-xs">{workout.forGender === "male" ? "Men" : "Women"}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -215,7 +265,7 @@ const Workouts = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-800">
-                {workoutData.map((workout) => (
+                {filteredWorkouts.map((workout) => (
                   <motion.tr 
                     key={workout.id}
                     whileHover={{ backgroundColor: "#222222" }}

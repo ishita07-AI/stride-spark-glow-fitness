@@ -13,10 +13,11 @@ import {
   CheckCircle,
   ArrowDownRight
 } from "lucide-react";
+import { WorkoutGallery } from "@/components/WorkoutGallery";
 
 const HeroSection = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black pt-20 pb-16 px-4">
+    <div className="bg-white pt-20 pb-16 px-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -109,25 +110,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative mx-auto w-full max-w-[600px]">
-              <motion.div 
-                className="absolute inset-0 rounded-2xl bg-gradient-to-br from-steppy-primary to-steppy-secondary blur-xl opacity-20 animate-pulse-ring"
-              />
-              
-              <motion.div 
-                className="relative overflow-hidden rounded-2xl"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img 
-                  src="/lovable-uploads/611d0e6c-78dc-4dfa-a627-b180ae391f47.png"
-                  alt="Fitness training"
-                  className="w-full h-full object-cover rounded-2xl"
-                />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </motion.div>
-            </div>
+            <WorkoutGallery className="w-full max-w-[600px] mx-auto" />
           </motion.div>
         </div>
       </div>
