@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
-import { Dumbbell, Calendar, Clock, Filter, Play, Pause, Male, Female } from "lucide-react";
+import { Dumbbell, Calendar, Clock, Filter, Play, Pause, User, Users } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -108,7 +107,6 @@ const Workouts = () => {
           </motion.button>
         </motion.div>
 
-        {/* Gender Selection */}
         <div className="mb-6 flex items-center space-x-4">
           <span className="text-gray-300">Filter by:</span>
           <button 
@@ -121,19 +119,18 @@ const Workouts = () => {
             className={`px-4 py-2 rounded-lg flex items-center ${selectedGender === "male" ? "bg-steppy-primary text-white" : "bg-gray-800 text-gray-300"}`}
             onClick={() => setSelectedGender("male")}
           >
-            <Male size={18} className="mr-2" />
+            <User size={18} className="mr-2" />
             <span>Men</span>
           </button>
           <button 
             className={`px-4 py-2 rounded-lg flex items-center ${selectedGender === "female" ? "bg-steppy-primary text-white" : "bg-gray-800 text-gray-300"}`}
             onClick={() => setSelectedGender("female")}
           >
-            <Female size={18} className="mr-2" />
+            <Users size={18} className="mr-2" />
             <span>Women</span>
           </button>
         </div>
 
-        {/* Featured Workout Video Section with Timer */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -149,10 +146,8 @@ const Workouts = () => {
               frameBorder="0"
             ></iframe>
             
-            {/* Timer Overlay */}
             <WorkoutTimer className="absolute top-4 left-4 z-20" />
             
-            {/* Stats Overlay */}
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white z-20">
               <div className="space-y-1">
                 <h3 className="text-xl font-semibold">{selectedWorkout.title}</h3>
@@ -162,11 +157,11 @@ const Workouts = () => {
                     {selectedWorkout.duration}
                   </span>
                   <span>{selectedWorkout.calories} cal</span>
-                  {selectedWorkout.forGender !== "both" && (
-                    <span className="flex items-center">
-                      {selectedWorkout.forGender === "male" ? <Male size={14} className="mr-1" /> : <Female size={14} className="mr-1" />}
-                      {selectedWorkout.forGender === "male" ? "Men" : "Women"}
-                    </span>
+                  {workout.forGender !== "both" && (
+                    <div className="flex items-center mt-1">
+                      {workout.forGender === "male" ? <User size={12} className="mr-1" /> : <Users size={12} className="mr-1" />}
+                      <span className="text-xs">{workout.forGender === "male" ? "Men" : "Women"}</span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -181,7 +176,6 @@ const Workouts = () => {
           </div>
         </motion.div>
 
-        {/* Workout Carousel */}
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-6 text-gray-100">Featured Workouts</h2>
           <Carousel className="w-full">
@@ -205,7 +199,7 @@ const Workouts = () => {
                           <p className="text-sm opacity-80">{workout.duration}</p>
                           {workout.forGender !== "both" && (
                             <div className="flex items-center mt-1">
-                              {workout.forGender === "male" ? <Male size={12} className="mr-1" /> : <Female size={12} className="mr-1" />}
+                              {workout.forGender === "male" ? <User size={12} className="mr-1" /> : <Users size={12} className="mr-1" />}
                               <span className="text-xs">{workout.forGender === "male" ? "Men" : "Women"}</span>
                             </div>
                           )}
@@ -221,7 +215,6 @@ const Workouts = () => {
           </Carousel>
         </div>
         
-        {/* Workout Table */}
         <div className="bg-[#1A1A1A] p-6 rounded-xl shadow-lg">
           <div className="flex flex-wrap gap-3 mb-4">
             <div className="flex items-center px-4 py-2 bg-[#2A2A2A] text-gray-300 rounded-lg">
