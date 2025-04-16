@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
 import { Dumbbell, Calendar, Clock, Filter, Play, Pause, User, Users } from "lucide-react";
 import {
@@ -82,7 +82,7 @@ const Workouts = () => {
   }, [selectedGender]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-workout-background text-workout-text">
       <NavBar />
       
       <main className="container px-4 py-8 mx-auto">
@@ -135,7 +135,7 @@ const Workouts = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-8 bg-[#1A1A1A] rounded-2xl shadow-lg overflow-hidden"
+          className="mb-8 bg-workout-card rounded-2xl shadow-lg overflow-hidden border border-workout-border"
         >
           <div className="relative aspect-video w-full">
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />

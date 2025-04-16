@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
@@ -50,10 +49,25 @@ const connectedDevices: Array<{
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-dashboard-background text-dashboard-text">
       <NavBar />
       
       <main className="container px-4 py-8 mx-auto">
+        {/* Hero Section with Large Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 overflow-hidden rounded-2xl relative"
+        >
+          <img 
+            src="/lovable-uploads/6ee2f839-d889-49a1-9fc1-48a14274c1e7.png" 
+            alt="Steppy Activity" 
+            className="w-full object-cover h-[400px]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-dashboard-background via-transparent to-transparent" />
+        </motion.div>
+
         <div className="flex flex-col md:flex-row items-start gap-8">
           {/* Main content area */}
           <div className="flex-1">

@@ -69,6 +69,20 @@ export default {
 					highlight: '#F59E0B',
 					dark: '#1F2937',
 					light: '#F9FAFB',
+				},
+				dashboard: {
+					background: '#1A1A1A',
+					card: '#222222',
+					border: '#333333',
+					text: '#FFFFFF',
+					muted: '#888888'
+				},
+				workout: {
+					background: '#FFFFFF',
+					card: '#F8F9FA',
+					border: '#E9ECEF',
+					text: '#212529',
+					muted: '#6C757D'
 				}
 			},
 			fontFamily: {
