@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { NavBar } from "@/components/NavBar";
@@ -13,43 +14,43 @@ import {
 const workoutData = [
   {
     id: 1,
-    title: "HIIT Training",
-    category: "Cardio",
-    duration: "30 min",
-    calories: 320,
-    difficulty: "Medium",
-    scheduled: "Today, 07:00 AM",
-    image: "/lovable-uploads/00d88f59-0429-4587-8886-94b6795a4161.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
-  },
-  {
-    id: 2,
-    title: "Dance Workout",
-    category: "Dance",
-    duration: "45 min",
-    calories: 450,
-    difficulty: "Hard",
-    scheduled: "Tomorrow, 06:30 PM",
-    image: "/lovable-uploads/d5c09273-7871-4878-b456-14157f7268e4.png",
-    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
-  },
-  {
-    id: 3,
-    title: "Core Strength",
+    title: "Strength Training",
     category: "Strength",
-    duration: "35 min",
-    calories: 210,
-    difficulty: "Medium",
-    scheduled: "Wed, 08:00 AM",
+    duration: "45 min",
+    calories: 400,
+    difficulty: "Hard",
+    scheduled: "Today, 07:00 AM",
     image: "/lovable-uploads/a16f3898-5e26-455a-8bdd-75a6b87c39b1.png",
     videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
   },
   {
-    id: 4,
-    title: "Cycling Session",
+    id: 2,
+    title: "Cardio Blast",
     category: "Cardio",
-    duration: "45 min",
-    calories: 480,
+    duration: "30 min",
+    calories: 350,
+    difficulty: "Medium",
+    scheduled: "Tomorrow, 06:30 PM",
+    image: "/lovable-uploads/00d88f59-0429-4587-8886-94b6795a4161.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+  },
+  {
+    id: 3,
+    title: "Core Power",
+    category: "Core",
+    duration: "35 min",
+    calories: 280,
+    difficulty: "Medium",
+    scheduled: "Wed, 08:00 AM",
+    image: "/lovable-uploads/d5c09273-7871-4878-b456-14157f7268e4.png",
+    videoUrl: "https://player.vimeo.com/video/510885662?autoplay=1&loop=1&muted=1",
+  },
+  {
+    id: 4,
+    title: "Full Body Circuit",
+    category: "Full Body",
+    duration: "50 min",
+    calories: 520,
     difficulty: "Hard",
     scheduled: "Thu, 07:30 PM",
     image: "/lovable-uploads/611d0e6c-78dc-4dfa-a627-b180ae391f47.png",
@@ -62,7 +63,7 @@ const Workouts = () => {
   const [isPlaying, setIsPlaying] = React.useState(true);
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A]">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <NavBar />
       
       <main className="container px-4 py-8 mx-auto">
@@ -73,12 +74,12 @@ const Workouts = () => {
           className="flex justify-between items-center mb-8"
         >
           <div>
-            <h1 className="text-3xl font-bold text-white">Your Workouts</h1>
+            <h1 className="text-3xl font-bold text-gray-100">Your Workouts</h1>
             <p className="text-gray-400 mt-1">Find and manage your fitness routines</p>
           </div>
           
           <motion.button
-            className="px-4 py-2 bg-[#4F46E5] text-white rounded-xl flex items-center"
+            className="px-4 py-2 bg-steppy-primary text-white rounded-xl flex items-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -92,7 +93,7 @@ const Workouts = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-8 bg-[#2A2A2A] rounded-2xl shadow-lg overflow-hidden"
+          className="mb-8 bg-[#1A1A1A] rounded-2xl shadow-lg overflow-hidden"
         >
           <div className="relative aspect-video w-full">
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
@@ -136,9 +137,9 @@ const Workouts = () => {
           </div>
         </motion.div>
 
-        {/* Workout Carousel with new styling */}
+        {/* Workout Carousel */}
         <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6 text-white">Featured Workouts</h2>
+          <h2 className="text-xl font-semibold mb-6 text-gray-100">Featured Workouts</h2>
           <Carousel className="w-full">
             <CarouselContent>
               {workoutData.map((workout) => (
@@ -170,11 +171,11 @@ const Workouts = () => {
           </Carousel>
         </div>
         
-        {/* Workout Table with updated styling */}
-        <div className="bg-[#2A2A2A] p-6 rounded-xl shadow-lg">
+        {/* Workout Table */}
+        <div className="bg-[#1A1A1A] p-6 rounded-xl shadow-lg">
           <div className="flex flex-wrap gap-3 mb-4">
-            <div className="flex items-center px-4 py-2 bg-gray-100 rounded-lg">
-              <Calendar size={18} className="text-gray-500 mr-2" />
+            <div className="flex items-center px-4 py-2 bg-[#2A2A2A] text-gray-300 rounded-lg">
+              <Calendar size={18} className="text-gray-400 mr-2" />
               <span className="text-sm">Calendar</span>
             </div>
             
@@ -183,15 +184,15 @@ const Workouts = () => {
               <span className="text-sm">Workouts</span>
             </div>
             
-            <div className="flex items-center px-4 py-2 bg-gray-100 rounded-lg ml-auto">
-              <Filter size={18} className="text-gray-500 mr-2" />
+            <div className="flex items-center px-4 py-2 bg-[#2A2A2A] text-gray-300 rounded-lg ml-auto">
+              <Filter size={18} className="text-gray-400 mr-2" />
               <span className="text-sm">Filter</span>
             </div>
           </div>
           
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-700">
-              <thead className="bg-[#333333]">
+            <table className="min-w-full divide-y divide-gray-800">
+              <thead className="bg-[#222222]">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
                     Workout
@@ -213,17 +214,17 @@ const Workouts = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-700">
+              <tbody className="divide-y divide-gray-800">
                 {workoutData.map((workout) => (
                   <motion.tr 
                     key={workout.id}
-                    whileHover={{ backgroundColor: "#333333" }}
+                    whileHover={{ backgroundColor: "#222222" }}
                     className="cursor-pointer text-gray-300"
                   >
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 rounded-lg bg-[#3A3A3A] flex items-center justify-center mr-3">
-                          <Dumbbell size={18} className="text-[#4F46E5]" />
+                        <div className="h-10 w-10 rounded-lg bg-[#2A2A2A] flex items-center justify-center mr-3">
+                          <Dumbbell size={18} className="text-steppy-primary" />
                         </div>
                         <div className="text-sm font-medium">{workout.title}</div>
                       </div>
