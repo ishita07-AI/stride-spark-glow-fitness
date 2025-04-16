@@ -82,7 +82,7 @@ const Workouts = () => {
   }, [selectedGender]);
 
   return (
-    <div className="min-h-screen bg-workout-background text-workout-text">
+    <div className="min-h-screen bg-[#1A1A1A] text-white">
       <NavBar />
       
       <main className="container px-4 py-8 mx-auto">
@@ -135,7 +135,7 @@ const Workouts = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="mb-8 bg-workout-card rounded-2xl shadow-lg overflow-hidden border border-workout-border"
+          className="mb-8 bg-[#222222] rounded-2xl shadow-lg overflow-hidden border border-[#333333]"
         >
           <div className="relative aspect-video w-full">
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
@@ -215,7 +215,7 @@ const Workouts = () => {
           </Carousel>
         </div>
         
-        <div className="bg-[#1A1A1A] p-6 rounded-xl shadow-lg">
+        <div className="bg-[#222222] p-6 rounded-xl shadow-lg border border-[#333333]">
           <div className="flex flex-wrap gap-3 mb-4">
             <div className="flex items-center px-4 py-2 bg-[#2A2A2A] text-gray-300 rounded-lg">
               <Calendar size={18} className="text-gray-400 mr-2" />

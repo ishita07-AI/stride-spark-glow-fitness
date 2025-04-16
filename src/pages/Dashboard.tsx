@@ -22,7 +22,6 @@ import {
   Bike
 } from "lucide-react";
 
-// Sample data for our dashboard
 const weeklySteps = [
   { day: "Mon", value: 9234 },
   { day: "Tue", value: 10345 },
@@ -33,7 +32,6 @@ const weeklySteps = [
   { day: "Sun", value: 10567 },
 ];
 
-// Define types specifically for connected devices
 const connectedDevices: Array<{
   id: string;
   name: string;
@@ -49,27 +47,11 @@ const connectedDevices: Array<{
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-dashboard-background text-dashboard-text">
+    <div className="min-h-screen bg-white">
       <NavBar />
       
       <main className="container px-4 py-8 mx-auto">
-        {/* Hero Section with Large Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 overflow-hidden rounded-2xl relative"
-        >
-          <img 
-            src="/lovable-uploads/6ee2f839-d889-49a1-9fc1-48a14274c1e7.png" 
-            alt="Steppy Activity" 
-            className="w-full object-cover h-[400px]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-dashboard-background via-transparent to-transparent" />
-        </motion.div>
-
         <div className="flex flex-col md:flex-row items-start gap-8">
-          {/* Main content area */}
           <div className="flex-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -231,7 +213,6 @@ const Dashboard = () => {
             </div>
           </div>
           
-          {/* Sidebar */}
           <div className="w-full md:w-80 space-y-6">
             <div className="bg-white rounded-2xl p-5 border shadow-sm">
               <h3 className="text-lg font-semibold mb-4">Today's Goal</h3>

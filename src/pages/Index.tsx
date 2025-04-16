@@ -110,7 +110,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <WorkoutGallery className="w-full max-w-[600px] mx-auto" />
+            <img 
+              src="/lovable-uploads/6ee2f839-d889-49a1-9fc1-48a14274c1e7.png" 
+              alt="Fitness Dashboard" 
+              className="w-full h-auto rounded-2xl shadow-2xl"
+            />
           </motion.div>
         </div>
       </div>
