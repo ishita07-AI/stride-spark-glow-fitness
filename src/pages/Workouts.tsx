@@ -157,10 +157,10 @@ const Workouts = () => {
                     {selectedWorkout.duration}
                   </span>
                   <span>{selectedWorkout.calories} cal</span>
-                  {workout.forGender !== "both" && (
+                  {selectedWorkout.forGender !== "both" && (
                     <div className="flex items-center mt-1">
-                      {workout.forGender === "male" ? <User size={12} className="mr-1" /> : <Users size={12} className="mr-1" />}
-                      <span className="text-xs">{workout.forGender === "male" ? "Men" : "Women"}</span>
+                      {selectedWorkout.forGender === "male" ? <User size={12} className="mr-1" /> : <Users size={12} className="mr-1" />}
+                      <span className="text-xs">{selectedWorkout.forGender === "male" ? "Men" : "Women"}</span>
                     </div>
                   )}
                 </div>
